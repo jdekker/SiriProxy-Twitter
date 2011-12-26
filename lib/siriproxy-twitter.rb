@@ -15,7 +15,7 @@ class SiriProxy::Plugin::Twitter < SiriProxy::Plugin
   end
 
   listen_for /tweet (.+)/i do |tweetText|
-    say "Here is your tweet:"
+    say "Here is your tweet, bro:"
 
     # send a "Preview" of the Tweet
     object = SiriAddViews.new
@@ -27,12 +27,12 @@ class SiriProxy::Plugin::Twitter < SiriProxy::Plugin
     object.views << SiriAnswerSnippet.new([answer])
     send_object object
 
-    if confirm "Ready to send it?"
+    if confirm "Ready to tweet it?"
       say "Posting to twitter..."
       Thread.new {
         begin
           @twitterClient.update(tweetText)
-          say "Ok it has been posted."
+          say "Ok it has been posted, bro."
         rescue Exception
           pp $!
           say "Sorry, I encountered an error: #{$!}"
@@ -41,7 +41,7 @@ class SiriProxy::Plugin::Twitter < SiriProxy::Plugin
         end
       }
     else
-      say "Ok I won't send it."
+      say "Ok I won't send it, bro."
       request_completed
     end
   end
