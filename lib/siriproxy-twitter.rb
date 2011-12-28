@@ -45,7 +45,7 @@ class SiriProxy::Plugin::Twitter < SiriProxy::Plugin
       request_completed
     end
     
-    listen_for /whats up twitter/i do 
+    listen_for /what's the most recent tweet/i do 
     say "Checking for the latest tweet..."
     say "Twitter.home_timeline.first.text"
     
