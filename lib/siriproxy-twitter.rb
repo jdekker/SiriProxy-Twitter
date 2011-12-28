@@ -14,7 +14,7 @@ class SiriProxy::Plugin::Twitter < SiriProxy::Plugin
     @twitterClient = ::Twitter::Client.new
   end
 
-  listen_for /tweet (.+)/i do |tweetText|
+  listen_for /tweet (.+)/i do |tweetText| #the first part is just listening, the second stops at tweet and starts listening then after that is doing and "tweetText" is defined
     say "Here is your tweet, bro:"
 
     # send a "Preview" of the Tweet
@@ -22,7 +22,7 @@ class SiriProxy::Plugin::Twitter < SiriProxy::Plugin
     object.make_root(last_ref_id)
     answer = SiriAnswer.new("Tweet", [
       SiriAnswerLine.new('logo','http://goo.gl/g2Tw9'), # this just makes things looks nice, but is obviously specific to my username
-      SiriAnswerLine.new(tweetText)
+      SiriAnswerLine.new(tweetText) # this is the text from above
     ])
     object.views << SiriAnswerSnippet.new([answer])
     send_object object
@@ -44,5 +44,10 @@ class SiriProxy::Plugin::Twitter < SiriProxy::Plugin
       say "Ok I won't send it, bro."
       request_completed
     end
+    
+    listen_for /whats up twitter/i do 
+    say "Checking for the latest tweet..."
+    say "Twitter.home_timeline.first.text"
+    
   end
 end
