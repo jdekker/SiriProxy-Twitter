@@ -49,5 +49,6 @@ class SiriProxy::Plugin::Twitter < SiriProxy::Plugin
     say "Checking for the latest tweet..."
     say "Twitter.home_timeline.first.text"
     
+    end
   end
 end
